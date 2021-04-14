@@ -1,3 +1,0 @@
-pandas
-weasyprint
-jinja2
