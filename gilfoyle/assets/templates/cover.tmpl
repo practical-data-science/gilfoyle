@@ -1,6 +1,6 @@
 {% if page.page_type is defined and page.page_type == 'cover' %}
     <!-- Cover -->
-    <section class="hero is-fullheight .container.is-fullhd cover">
+    <section class="hero is-fullheight .container.is-fullhd cover" style="background: url({{ page.page_background }}) no-repeat center;background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
         <div class="hero-body cover">
             <div class="container">
                 <h1 class="title is-1 cover">{{ page.page_title }}</h1>

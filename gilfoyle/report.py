@@ -49,7 +49,8 @@ class Report:
                  page_notification=None,
                  page_metrics=None,
                  page_dataframe=None,
-                 page_visualisation=None):
+                 page_visualisation=None,
+                 page_background=None):
         """Add a new page to the payload for the report.
 
         Args:
@@ -64,6 +65,7 @@ class Report:
             page_metrics: Dictionary of page metrics
             page_dataframe: Pandas dataframe with formatted headers
             page_visualisation: Image of data visualisation to include.
+            page_background: Image path of cover background image.
 
         Returns:
             dict: Current payload with new data appended.
@@ -78,7 +80,8 @@ class Report:
                 'page_notification': page_notification,
                 'page_metrics': page_metrics,
                 'page_dataframe': self.format_dataframe(page_dataframe),
-                'page_visualisation': page_visualisation
+                'page_visualisation': page_visualisation,
+                'page_background': page_background,
                 }
         payload['pages'].append(page)
         return payload
