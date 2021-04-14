@@ -2,6 +2,7 @@
 venv
 build
 dist
+gilfoyle.egg-info
 
 example.html
 example.pdf
