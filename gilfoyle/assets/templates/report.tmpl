@@ -1,0 +1,220 @@
+{% if page.page_type is defined and page.page_type == 'report' %}
+
+
+    {% if page.page_layout is defined and page.page_layout == 'simple' %}
+    <!-- Report: Layout / Simple  -->
+    <section class="hero is-fullheight .container.is-fullhd report">
+      <div class="hero-body report">
+        <div class="container">
+
+          {% if page.page_title is defined and page.page_title !='' %}
+          <h1 class="title report is-4">{{ page.page_title }}</h1>
+          {% endif %}
+
+          {% include 'assets/templates/metrics.tmpl' %}
+
+          {% if page.page_commentary is defined and page.page_commentary !='None' %}
+          <p class="commentary">{{ page.page_commentary }}</p>
+          {% endif %}
+
+          {% if page.page_dataframe is defined and page.page_dataframe !='' %}
+            {{ page.page_dataframe }}
+          {% endif %}
+
+        </div>
+      </div>
+    </section>
+    <!-- Report: Layout / Simple -->
+    {% endif %}
+
+
+
+    {% if page.page_layout is defined and page.page_layout == 'left-commentary' %}
+    <!-- Report: Layout / Left commentary  -->
+    <section class="hero is-fullheight .container.is-fullhd report">
+      <div class="hero-body report">
+        <div class="container">
+
+          {% if page.page_title is defined and page.page_title !='' %}
+          <h1 class="title report is-4">{{ page.page_title }}</h1>
+          {% endif %}
+
+
+            {% include 'assets/templates/metrics.tmpl' %}
+
+
+		    <!-- Two column layout -->
+			<div class="columns is-mobile">
+			 	<div class="column is-one-third">
+                  {% if page.page_commentary is defined and page.page_commentary !='None' %}
+                  <p class="commentary">{{ page.page_commentary }}</p>
+                  {% endif %}
+
+                  {% if page.page_visualisation is defined and page.page_visualisation !='' %}
+                    <img src="{{ page.page_visualisation }}">
+                  {% endif %}
+
+                  {% include 'assets/templates/message.tmpl' %}
+                  {% include 'assets/templates/notification.tmpl' %}
+
+                </div>
+                <div class="column is-two-thirds">
+                  {% if page.page_dataframe is defined and page.page_dataframe !='' %}
+                    {{ page.page_dataframe }}
+                  {% endif %}
+                </div>
+            </div>
+            <!-- Two column layout -->
+
+        </div>
+      </div>
+    </section>
+    <!-- Report: Layout / Left commentary -->
+    {% endif %}
+
+
+
+
+    {% if page.page_layout is defined and page.page_layout == 'plot' %}
+    <!-- Report: Layout / Plot  -->
+    <section class="hero is-fullheight .container.is-fullhd report">
+      <div class="hero-body report">
+        <div class="container">
+
+          {% if page.page_title is defined and page.page_title !='' %}
+          <h1 class="title report is-4">{{ page.page_title }}</h1>
+          {% endif %}
+
+          {% if page.page_commentary is defined and page.page_commentary !='None' %}
+          <p class="commentary">{{ page.page_commentary }}</p>
+          {% endif %}
+
+          {% if page.page_visualisation is defined and page.page_visualisation !='' %}
+            <img src="{{ page.page_visualisation }}" width="100%" height="100%">
+          {% endif %}
+
+        </div>
+      </div>
+    </section>
+    <!-- Report: Layout / Plot -->
+    {% endif %}
+
+
+
+
+
+    {% if page.page_layout is defined and page.page_layout == 'columns' %}
+    <!-- Report: Layout / Plot  -->
+    <section class="hero is-fullheight .container.is-fullhd report">
+      <div class="hero-body report">
+        <div class="container">
+
+          {% if page.page_title is defined and page.page_title !='' %}
+          <h1 class="title report is-4">{{ page.page_title }}</h1>
+          {% endif %}
+
+            <div class="columns">
+
+              <div class="column">
+                  {% if page.page_commentary is defined and page.page_commentary !='None' %}
+                  <p class="commentary">{{ page.page_commentary }}</p>
+                  {% endif %}
+
+                  {% if page.page_visualisation is defined and page.page_visualisation !='' %}
+                    <img src="{{ page.page_visualisation }}" width="100%" height="100%">
+                  {% endif %}
+              </div>
+
+              <div class="column">
+                  {% if page.page_commentary is defined and page.page_commentary !='None' %}
+                  <p class="commentary">{{ page.page_commentary }}</p>
+                  {% endif %}
+
+                  {% if page.page_visualisation is defined and page.page_visualisation !='' %}
+                    <img src="{{ page.page_visualisation }}" width="100%" height="100%">
+                  {% endif %}
+              </div>
+
+            </div>
+
+
+        </div>
+      </div>
+    </section>
+    <!-- Report: Layout / Plot -->
+    {% endif %}
+
+
+
+
+    {% if page.page_layout is defined and page.page_layout == 'rows' %}
+    <!-- Report: Layout / Plot  -->
+    <section class="hero is-fullheight .container.is-fullhd report">
+      <div class="hero-body report">
+        <div class="container">
+
+          {% if page.page_title is defined and page.page_title !='' %}
+          <h1 class="title report is-4">{{ page.page_title }}</h1>
+          {% endif %}
+
+
+
+
+           <div class='rows'>
+              <div class='row is-full'>
+
+                <div class="columns">
+
+                  <div class="column">
+                      {% if page.page_visualisation is defined and page.page_visualisation !='' %}
+                        <img src="{{ page.page_visualisation }}" width="100%" height="100%">
+                      {% endif %}
+                  </div>
+
+                  <div class="column is-one-quarter">
+                      {% if page.page_commentary is defined and page.page_commentary !='None' %}
+                      <p class="commentary">{{ page.page_commentary }}</p>
+                      {% endif %}
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <div class='row is-full'>
+
+                <div class="columns">
+
+                  <div class="column">
+                      {% if page.page_visualisation is defined and page.page_visualisation !='' %}
+                        <img src="{{ page.page_visualisation }}" width="100%" height="100%">
+                      {% endif %}
+                  </div>
+
+                  <div class="column is-one-quarter">
+                      {% if page.page_commentary is defined and page.page_commentary !='None' %}
+                      <p class="commentary">{{ page.page_commentary }}</p>
+                      {% endif %}
+                  </div>
+
+                </div>
+
+              </div>
+
+
+           </div>
+
+
+
+        </div>
+      </div>
+    </section>
+    <!-- Report: Layout / Plot -->
+    {% endif %}
+
+
+
+
+{% endif %}
+

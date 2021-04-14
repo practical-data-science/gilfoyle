@@ -1,0 +1,19 @@
+{% if page.page_metrics is defined and page.page_metrics is not none %}
+
+      <!-- Metrics -->
+      <nav class="level is-mobile">
+
+        {% for page in page.page_metrics %}
+        <div class="metric level-item has-text-centered">
+          <div>
+            <p class="metric-title">{{ page['metric_title'] }}</p>
+            <p class="metric-value">{{ page['metric_value'] }}</p>
+            <p class="mnetric-label">{{ page['metric_label'] }}</p>
+          </div>
+        </div>
+        {% endfor %}
+
+      </nav>
+      <!-- Metrics -->
+
+{% endif %}

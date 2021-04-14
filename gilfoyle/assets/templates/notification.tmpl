@@ -1,0 +1,7 @@
+{% if page.page_notification is defined and page.page_notification is not none %}
+<div class="notification">
+    <div class="message-body">
+        {{ page.page_notification }}
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,16 @@
+{% if page.page_type is defined and page.page_type == 'chapter' %}
+
+    {% if page.page_title is defined and page.page_title !='' %}
+        <!-- Chapter -->
+        <section class="hero is-fullheight .container.is-fullhd chapter">
+            <div class="hero-body chapter">
+                <div class="container">
+                    <h1 class="title is-1 chapter">{{ page.page_title }}</h1>
+                    <h2 class="subtitle is-3 chapter">{{ page.page_subheading }}</h2>
+                </div>
+            </div>
+        </section>
+        <!-- Chapter -->
+    {% endif %}
+
+{% endif %}

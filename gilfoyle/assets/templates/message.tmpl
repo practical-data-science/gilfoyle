@@ -1,0 +1,7 @@
+{% if page.page_message is defined and page.page_message is not none %}
+<div class="message is-{{ page.page_message.style }}">
+    <div class="message-body">
+        {{ page.page_message.message }}
+    </div>
+</div>
+{% endif %}

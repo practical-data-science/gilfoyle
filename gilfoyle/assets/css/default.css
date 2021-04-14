@@ -1,0 +1,95 @@
+/**
+ * Default CSS for Gilfoyle report generator
+ * Author: Matt Clarke
+ *
+ */
+
+html,
+body {
+    font-family: 'Fira Sans';
+}
+
+@page { size: 16in 9in; margin:0; padding:0;}
+
+@media print {
+        section {page-break-after: always;}
+    }
+
+.cover{
+    background: url(../images/cover.jpg) no-repeat center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: #ffffff;
+}
+    .cover h1{
+        font-weight: bold;
+    }
+
+.chapter{
+    background:#32B5C9;
+    color: #ffffff;
+}
+  .chapter h1{
+    font-weight: bold;
+  }
+
+.report{
+    align-items: initial !important;
+}
+    .level-item{
+        background-color: #32B5C9;
+        color: #fff;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+        .level-item .title{
+            color: #fff;
+        }
+
+    p.heading{
+      font-size: 28px;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    p.commentary{
+        margin-bottom: 30px;
+    }
+
+table{
+    border: 0 !important;
+    font-size: 0.9em;
+}
+
+    table th, table td{
+        text-align: left !important;
+    }
+
+h1.title.report{
+  font-weight: bold;
+  color: #555;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+
+/*
+METRICS
+*/
+.level-item{
+    padding-top: 20px;
+}
+
+    .metric-title{
+        font-weight: bold;
+    }
+    .metric-value{
+        font-weight: bold;
+        font-size: 2.5em;
+    }
+
+    .metric-label{
+        color: #fff;
+    }
+
