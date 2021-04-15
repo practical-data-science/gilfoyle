@@ -1,4 +1,6 @@
 import os
+import re
+import numpy as np
 import pandas as pd
 from weasyprint import HTML
 from jinja2 import Environment
@@ -191,3 +193,188 @@ class Report:
         else:
             return HTML(string=self._render_template(payload),
                         base_url=self.base_url).write_pdf(self.output)
+
+    """
+    Metrics
+    """
+
+    @staticmethod
+    def get_percentage_change(metric_now, metric_before):
+        """Return the percentage change in a metric.
+
+        Args:
+            metric_now (float/int): Metric in current period.
+            metric_before (float/int): Metric in previous period.
+
+        Returns:
+            change (float): Percentage change to two decimal places.
+        """
+
+        if metric_now == metric_before:
+            return 0
+        try:
+            return (abs(metric_now - metric_before) / metric_before) * 100.0
+        except ZeroDivisionError:
+            return float('inf')
+
+    @staticmethod
+    def get_change_direction(metric_now, metric_before):
+        """Return the direction of change in a metric.
+
+        Args:
+            metric_now (float/int): Metric in current period.
+            metric_before (float/int): Metric in previous period.
+
+        Returns:
+            direction (string): Returns up, down, flat or nothing.
+        """
+
+        if metric_now > metric_before:
+            direction = 'up'
+        elif metric_now < metric_before:
+            direction = 'down'
+        elif metric_now == metric_before:
+            direction = 'flat'
+        else:
+            direction = ''
+
+        return direction
+
+    @staticmethod
+    def to_numeric(string):
+        """Strip non-numeric characters and return a float or int depending on decimal.
+
+        Args:
+            string (string): Formatted number, i.e. £123,391
+
+        Return:
+            numeric (int/float): Numeric representation of string in int or float.
+        """
+
+        if isinstance(string, str):
+            numeric = re.sub("[^0-9.]", "", string)
+
+            if numeric.isdigit():
+                numeric = int(numeric)
+            else:
+                numeric = float(numeric)
+
+        else:
+            numeric = string
+
+        return numeric
+
+    @staticmethod
+    def format_number(metric, prefix=None, suffix=None):
+        """Add a prefix or suffix to a number.
+
+        Args:
+            metric (int/float/string): The metric to prefix or suffix.
+            prefix (optional, string): The prefix to add, i.e. £
+            suffix (optional, string): The suffix to add, i.e. %
+
+        Returns:
+            metric (string): The metric with a prefix or suffix, i.e. £12.99 or 12.23%.
+        """
+
+        if prefix:
+            metric = prefix + str(metric)
+        elif suffix:
+            metric = str(metric) + suffix
+        else:
+            metric
+
+        return metric
+
+    def add_metric_tile(self,
+                        metric_title,
+                        metric_value_now,
+                        metric_value_before,
+                        metric_prefix=None,
+                        metric_suffix=None):
+        """Create a metric tile dictionary to append to the metrics list payload.
+
+        Args:
+            metric_title (string): Title of metric tile, i.e. Revenue
+            metric_value_now (int/float): Value of metric in current period.
+            metric_value_before (int/float): Value of metric in same period 12 months ago.
+            metric_prefix (optional, string): Optional prefix, i.e. £
+            metric_suffix (optional, string): Optional suffix, i.e. %
+
+        Returns:
+            Dictionary containing metric tile data to be appended to the metrics list.
+
+            {'metric_type': 'number',
+             'metric_title': 'Transactions',
+             'metric_value': 4076,
+             'metric_label': 'Up 24% on last year'}
+
+        Usage:
+            metrics = []
+
+            metrics.append(
+                add_metric_tile(metric_title='Transactions',
+                                metric_value_now=df_google_ads['Transactions'].loc[0],
+                                metric_value_before=df_google_ads['Transactions'].loc[12]
+                           )
+            )
+
+            metrics.append(
+                add_metric_tile(metric_title='Revenue',
+                                metric_value_now=df_google_ads['Revenue'].loc[0],
+                                metric_value_before=df_google_ads['Revenue'].loc[12],
+                                metric_prefix='£'
+                           )
+            )
+
+            metrics.append(
+                add_metric_tile(metric_title='Costs',
+                                metric_value_now=df_google_ads['Costs'].loc[0],
+                                metric_value_before=df_google_ads['Costs'].loc[12],
+                                metric_prefix='£'
+                           )
+            )
+
+            metrics.append(
+                add_metric_tile(metric_title='Cost of Sale',
+                                metric_value_now=df_google_ads['COS'].loc[0],
+                                metric_value_before=df_google_ads['COS'].loc[12],
+                                metric_suffix='%'
+                           )
+            )
+
+        Output:
+            [{'metric_title': 'Transactions',
+          'metric_value': 4076,
+          'metric_label': 'Up 24% on last year'},
+         {'metric_title': 'Revenue',
+          'metric_value': '£253659',
+          'metric_label': 'Up 47% on last year'},
+         {'metric_title': 'Costs',
+          'metric_value': '£30244',
+          'metric_label': 'Up 62% on last year'},
+         {'metric_title': 'Cost of Sale',
+          'metric_value': '11.92%',
+          'metric_label': 'Up 10% on last year'}]
+
+        """
+
+        # Remove any formatting
+        metric_value_now = self.to_numeric(metric_value_now)
+        metric_value_before = self.to_numeric(metric_value_before)
+
+        # Get percentage change and change direction
+        percentage_change = self.get_percentage_change(metric_value_now, metric_value_before)
+        change_direction = self.get_change_direction(metric_value_now, metric_value_before)
+        metric_label = change_direction.capitalize() + ' ' + str(round(percentage_change)) + '% on last year'
+
+        # Add prefix or suffix
+        metric_value_now = self.format_number(metric_value_now, metric_prefix, metric_suffix)
+
+        metric = {
+            'metric_title': metric_title,
+            'metric_value': metric_value_now,
+            'metric_label': metric_label
+        }
+
+        return metric

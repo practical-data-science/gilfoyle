@@ -45,7 +45,7 @@
 
 		    <!-- Two column layout -->
 			<div class="columns is-mobile">
-			 	<div class="column is-one-third">
+			 	<div class="column is-one-quarter">
                   {% if page.page_commentary is defined and page.page_commentary is not none %}
                   <p class="commentary">{{ page.page_commentary }}</p>
                   {% endif %}
@@ -58,7 +58,7 @@
                   {% include 'assets/templates/notification.tmpl' %}
 
                 </div>
-                <div class="column is-two-thirds">
+                <div class="column is-three-quarters">
                   {% if page.page_dataframe is defined and page.page_dataframe !='' %}
                     {{ page.page_dataframe }}
                   {% endif %}

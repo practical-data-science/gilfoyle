@@ -82,7 +82,7 @@ METRICS
 }
 
     .metric-title{
-        font-weight: bold;
+        font-weight: normal;
     }
     .metric-value{
         font-weight: bold;
