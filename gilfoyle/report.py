@@ -215,7 +215,7 @@ class Report:
         try:
             return (abs(metric_now - metric_before) / metric_before) * 100.0
         except ZeroDivisionError:
-            return float('inf')
+            return float(0)
 
     @staticmethod
     def get_change_direction(metric_now, metric_before):
