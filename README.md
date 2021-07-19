@@ -5,7 +5,8 @@ Gilfoyle is a report generation tool for Python which makes it quick and easy to
 You can install Gilfoyle by entering `pip3 install gilfoyle` in your terminal. 
 
 #### Usage
-Gilfoyle can be used within a regular Python script or from inside a Jupyter notebook. 
+Gilfoyle can be used within a regular Python script or from inside a Jupyter notebook. See the `example.py`
+file for some working examples. 
 
 ```python
 # Load packages

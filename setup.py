@@ -8,7 +8,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 setup(
     name='gilfoyle',
     packages=['gilfoyle'],
-    version='0.92',
+    version='0.913',
     license='MIT',
     description='Gilfoyle is a Python-based report generator for data scientists who use Pandas.',
     long_description=long_description,
@@ -17,7 +17,7 @@ setup(
     author_email='matt@practicaldatascience.co.uk',
     url='https://github.com/practical-data-science/gilfoyle',
     download_url='https://github.com/practical-data-science/gilfoyle/archive/master.zip',
-    keywords=['python', 'reports', 'reporting', 'pandas'],
+    keywords=['python', 'reports', 'reporting', 'pandas', 'pdf'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
@@ -25,6 +25,6 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.8',
     ],
-    install_requires=['pandas', 'weasyprint', 'jinja2'],
+    install_requires=['pandas', 'weasyprint', 'jinja2', 'seaborn'],
     include_package_data=True
 )

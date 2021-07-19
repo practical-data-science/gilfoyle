@@ -237,31 +237,3 @@ payload = pdf.add_page(payload,
 # Create the report
 pdf.create_report(payload, verbose=False, output='pdf')
 print('Created example.pdf')
-
-# ====================================================================================================================
-# Creating a custom template
-# ====================================================================================================================
-
-# Create a report
-pdf = report.Report(output='custom_template.pdf', template='~/PycharmProjects/gilfoyle/custom.tpl')
-pdf.set_title('Gilfoyle custom template')
-
-# Create an empty payload
-payload = pdf.get_payload()
-
-# Load a Pandas dataframe and return 13 rows
-df = pd.read_csv('https://raw.githubusercontent.com/flyandlure/datasets/master/monthly-ecommerce-data.csv',
-                 skiprows=1,
-                 names=['Period', 'Sessions', 'Transactions', 'Conversion Rate', 'Revenue', 'AOV']).head(13)
-
-# Add the dataframe to the payload
-payload = pdf.add_page(payload,
-                       page_type='report',
-                       page_layout='simple',
-                       page_title='Simple layout, dataframe',
-                       page_dataframe=df
-                       )
-
-# Create the report
-pdf.create_report(payload, verbose=False, output='pdf')
-print('Created custom_template.pdf')
