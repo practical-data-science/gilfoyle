@@ -3,9 +3,3 @@ venv
 build
 dist
 gilfoyle.egg-info
-
-example.html
-example.pdf
-example.py
-sessions.png
-sessions_small.png
