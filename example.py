@@ -65,7 +65,8 @@ metrics = [
         metric_title='Conversion rate',
         metric_value_now=df['Conversion rate'].loc[0],
         metric_value_before=df['Conversion rate'].loc[12],
-        metric_name='year'
+        metric_name='year',
+        metric_suffix='%'
     ),
     pdf.add_metric_tile(
         metric_title='Transactions',
@@ -75,15 +76,17 @@ metrics = [
     ),
     pdf.add_metric_tile(
         metric_title='AOV',
-        metric_value_now=df['AOV'].loc[0],
+        metric_value_now=round(df['AOV'].loc[0], 2),
         metric_value_before=df['AOV'].loc[12],
-        metric_name='year'
+        metric_name='year',
+        metric_prefix='£'
     ),
     pdf.add_metric_tile(
         metric_title='Revenue',
         metric_value_now=df['Revenue'].loc[0],
         metric_value_before=df['Revenue'].loc[12],
-        metric_name='year'
+        metric_name='year',
+        metric_prefix='£'
     ),
 ]
 
@@ -117,7 +120,8 @@ metrics = [
         metric_title='Conversion rate',
         metric_value_now=df['Conversion rate'].loc[0],
         metric_value_before=df['Conversion rate'].loc[1],
-        metric_name='month'
+        metric_name='month',
+        metric_suffix='%'
     ),
     pdf.add_metric_tile(
         metric_title='Transactions',
@@ -127,15 +131,17 @@ metrics = [
     ),
     pdf.add_metric_tile(
         metric_title='AOV',
-        metric_value_now=df['AOV'].loc[0],
+        metric_value_now=round(df['AOV'].loc[0], 2),
         metric_value_before=df['AOV'].loc[1],
-        metric_name='month'
+        metric_name='month',
+        metric_prefix='£'
     ),
     pdf.add_metric_tile(
         metric_title='Revenue',
         metric_value_now=df['Revenue'].loc[0],
         metric_value_before=df['Revenue'].loc[1],
-        metric_name='month'
+        metric_name='month',
+        metric_prefix='£'
     ),
 ]
 
@@ -144,6 +150,51 @@ payload = pdf.add_page(payload,
                        page_type='report',
                        page_layout='simple',
                        page_title='Simple layout, dataframe, MoM metrics',
+                       page_dataframe=df,
+                       page_metrics=metrics,
+                       )
+
+# ====================================================================================================================
+# Simple layout with dataframe and no metrics comparison
+# ====================================================================================================================
+
+# Load a Pandas dataframe and return 13 rows
+df = pd.read_csv('https://raw.githubusercontent.com/flyandlure/datasets/master/monthly-ecommerce-data.csv',
+                 skiprows=1,
+                 names=['Period', 'Sessions', 'Transactions', 'Conversion rate', 'Revenue', 'AOV']).head(13)
+
+# Add metrics
+metrics = [
+    pdf.add_metric_tile(
+        metric_title='Sessions',
+        metric_value_now=df['Sessions'].loc[0],
+    ),
+    pdf.add_metric_tile(
+        metric_title='Conversion rate',
+        metric_value_now=df['Conversion rate'].loc[0],
+        metric_suffix='%'
+    ),
+    pdf.add_metric_tile(
+        metric_title='Transactions',
+        metric_value_now=df['Transactions'].loc[0],
+    ),
+    pdf.add_metric_tile(
+        metric_title='AOV',
+        metric_value_now=round(df['AOV'].loc[0], 2),
+        metric_prefix='£'
+    ),
+    pdf.add_metric_tile(
+        metric_title='Revenue',
+        metric_value_now=df['Revenue'].loc[0],
+        metric_prefix='£'
+    ),
+]
+
+# Add the dataframe to the payload
+payload = pdf.add_page(payload,
+                       page_type='report',
+                       page_layout='simple',
+                       page_title='Simple layout, dataframe, metrics (no comparison)',
                        page_dataframe=df,
                        page_metrics=metrics,
                        )

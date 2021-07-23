@@ -289,7 +289,7 @@ class Report:
     def add_metric_tile(self,
                         metric_title,
                         metric_value_now,
-                        metric_value_before,
+                        metric_value_before=None,
                         metric_prefix=None,
                         metric_suffix=None,
                         metric_name='year'):
@@ -298,7 +298,7 @@ class Report:
         Args:
             metric_title (string): Title of metric tile, i.e. Revenue
             metric_value_now (int/float): Value of metric in current period.
-            metric_value_before (int/float): Value of metric in same period 12 months ago.
+            metric_value_before (optional, int/float): Value of metric in same period 12 months ago.
             metric_prefix (optional, string): Optional prefix, i.e. £
             metric_suffix (optional, string): Optional suffix, i.e. %
             metric_name (optional, string, default = year): Optional metric name, i.e. month, week, year
@@ -366,9 +366,12 @@ class Report:
         metric_value_before = self.to_numeric(metric_value_before)
 
         # Get percentage change and change direction
-        percentage_change = self.get_percentage_change(metric_value_now, metric_value_before)
-        change_direction = self.get_change_direction(metric_value_now, metric_value_before)
-        metric_label = change_direction.capitalize() + ' ' + str(round(percentage_change)) + '% on last ' + metric_name
+        if metric_value_before:
+            percentage_change = self.get_percentage_change(metric_value_now, metric_value_before)
+            change_direction = self.get_change_direction(metric_value_now, metric_value_before)
+            metric_label = change_direction.capitalize() + ' ' + str(round(percentage_change)) + '% on last ' + metric_name
+        else:
+            metric_label = ''
 
         # Add prefix or suffix
         metric_value_now = self.format_number(metric_value_now, metric_prefix, metric_suffix)
