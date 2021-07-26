@@ -4,11 +4,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ title }}</title>
+    <title>{{ report.title }}</title>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
     <style>
     {% include 'assets/css/default.css' %}
+
+    .chapter{background: {{report.accent_background_color}};}
+    .level-item{background-color: {{report.accent_background_color}};}
+
+    .chapter{color: {{report.accent_font_color}};}
+    .level-item{color: {{report.accent_font_color}};}
+
     </style>
 
 </head>

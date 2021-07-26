@@ -13,7 +13,10 @@ from gilfoyle import report
 
 # Create a report
 pdf = report.Report(output='example.pdf')
+
 pdf.set_title('Gilfoyle example')
+pdf.set_accent_background_color('#9f85ca')
+pdf.set_accent_font_color('#fff')
 
 # Create an empty payload
 payload = pdf.get_payload()

@@ -27,8 +27,8 @@ body {
     }
 
 .chapter{
-    background:#32B5C9;
-    color: #ffffff;
+   /* background:#32B5C9;*/
+   /* color: #ffffff;*/
 }
   .chapter h1{
     font-weight: bold;
@@ -38,8 +38,8 @@ body {
     align-items: initial !important;
 }
     .level-item{
-        background-color: #32B5C9;
-        color: #fff;
+        /*background-color: #32B5C9;*/
+        /*color: #fff;*/
         padding-top: 30px;
         padding-bottom: 30px;
     }

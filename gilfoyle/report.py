@@ -18,6 +18,8 @@ class Report:
         self.base_url = base_url
         self.payload = ''
         self.title = ''
+        self.accent_background_color = ''
+        self.accent_font_color = ''
 
     """
     Report configuration
@@ -25,6 +27,18 @@ class Report:
 
     def set_title(self, title):
         self.title = title
+
+    def set_accent_background_color(self, accent_background_color):
+        if accent_background_color:
+            self.accent_background_color = accent_background_color
+        else:
+            self.accent_background_color = '#32B5C9'
+
+    def set_accent_font_color(self, accent_font_color):
+        if accent_font_color:
+            self.accent_font_color = accent_font_color
+        else:
+            self.accent_font_color = '#FFFFFF'
 
     """
     Add pages
@@ -146,6 +160,9 @@ class Report:
         """
 
         payload['report']['title'] = self.title
+        payload['report']['accent_background_color'] = self.accent_background_color
+        payload['report']['accent_font_color'] = self.accent_font_color
+
         return payload
 
     """
@@ -159,7 +176,7 @@ class Report:
         Args:
             html: string of HTML.
             filename: filename and path.
-
+cl
         Returns:
             File.
         """
@@ -185,6 +202,7 @@ class Report:
         """
 
         payload = self._extend_payload(payload)
+
         if verbose:
             print(payload)
 
