@@ -115,8 +115,8 @@ class Report:
 
         if isinstance(dataframe, pd.DataFrame):
             formatted_df = dataframe.to_html(classes=['dataframe', 'table', 'is-striped', 'is-fullwidth'],
-                                             max_rows=13,
-                                             max_cols=10,
+                                             max_rows=len(dataframe.index),
+                                             max_cols=len(dataframe.columns),
                                              index=False)
             return formatted_df
 
